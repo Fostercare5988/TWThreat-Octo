@@ -6,12 +6,12 @@
 [![SuperWoW: v2.2+](https://img.shields.io/badge/SuperWoW-v2.2+-brightgreen.svg)](https://github.com/balakethelock/SuperWoW)
 [![NamPower: v4.6.2+](https://img.shields.io/badge/NamPower-v4.6.2+-blueviolet.svg)](https://github.com/Emyrk/nampower)
 [![UnitXP: SP3](https://img.shields.io/badge/UnitXP-SP3-teal.svg)](https://codeberg.org/konaka/UnitXP_SP3)
-[![DXVK: 144Hz+](https://img.shields.io/badge/DXVK-144Hz+-red.svg)](https://github.com/doitsujin/dxvk)
+[![DXVK: Vulkan](https://img.shields.io/badge/DXVK-Vulkan-red.svg)](https://github.com/doitsujin/dxvk)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**TWThreat v1.3.0** is an enterprise-grade, real-time threat metering engine engineered natively for **World of Warcraft 1.12.1 (Build 5875)** running on the **Enhanced Client Extension Stack** (**ClassicAPI v1.13.3+**, **SuperWoW v2.2+**, **NamPower 4.6.2+**, **UnitXP SP3**, and **DXVK 144Hz+**).
+**TWThreat v1.3.0** is an enterprise-grade, real-time threat metering engine engineered natively for **World of Warcraft 1.12.1 (Build 5875)** running on the **Enhanced Client Extension Stack** (**ClassicAPI v1.13.3+**, **SuperWoW v2.2+**, **NamPower 4.6.2+**, **UnitXP SP3**, and **DXVK**).
 
-TWThreat provides instantaneous server-authoritative threat tracking, eliminates combat garbage collection stutter, delivers 144Hz/240Hz+ smooth bar animations, and provides direct SuperWoW GUID targeting.
+TWThreat provides instantaneous server-authoritative threat tracking, eliminates combat garbage collection stutter, delivers smooth bar animations, and provides direct SuperWoW GUID targeting.
 
 Created and actively maintained by **[Fostercare5988](https://github.com/Fostercare5988)**.
 
@@ -27,11 +27,11 @@ TWThreat is engineered around strict low-level system integration:
 | **SuperWoW** | `v2.2+` | Direct memory state access, `TargetUnit(guid)` instant mob targeting, and zero-latency threat synchronization. |
 | **NamPower** | `v4.6.2+` | Microsecond-precision combat pipeline and frame-0 event dispatching. |
 | **UnitXP** | `SP3` | High-precision unit inspection and exact threat percentage calculation. |
-| **DXVK** | `Latest` | Decoupled high-refresh 144Hz/240Hz+ rendering with zero garbage collection heap churn and normalized delta-time bar animations. |
+| **DXVK** | `Latest` | Decoupled high-refresh rendering with zero garbage collection heap churn and normalized delta-time bar animations. |
 
 ### Elimination of 2006 Legacy Techniques
 - **Zero Combat GC Churn**: Eradicated dynamic table allocations during combat. Employs pre-allocated recycling pools (`threatPool`, `tankModePool`, `sortList`) and single-pass string parsing, eliminating frame drops in 40-man raids.
-- **Delta-Time Decoupled 144Hz+ Smoothing**: Bar animations and glow transitions use normalized delta-time (`dt`) exponential smoothing, guaranteeing stutter-free rendering under DXVK and Vulkan.
+- **Delta-Time Decoupled Frame Smoothing**: Bar animations and glow transitions use normalized delta-time (`dt`) exponential smoothing, guaranteeing stutter-free rendering under DXVK and Vulkan.
 - **SuperWoW Direct GUID Targeting**: Tank Mode utilizes SuperWoW's `TargetUnit(guid)` API for instant, 100% reliable targeting of specific mobs in multi-mob packs without fuzzy targeting errors.
 - **Zero pfUI Bloat & Clean XML**: Completely eliminated legacy pfUI dependencies, unresolved frame anchors (`pfTarget`), and dead texture assets, ensuring zero errors in `FrameXML.log`.
 
