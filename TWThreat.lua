@@ -1,7 +1,7 @@
--- Strict Engine Dependency Guard
+-- Strict Engine Dependency Guard (Mandatory ClassicAPI v1.13.3+ & SuperWoW v2.2+)
 if not (CLASSIC_API_VERSION and SUPERWOW_VERSION) then
     if DEFAULT_CHAT_FRAME then
-        DEFAULT_CHAT_FRAME:AddMessage("|cffff2020[TWThreat Fatal Error]|r TWThreat requires ClassicAPI.dll & SuperWoW! Please ensure ClassicAPI.dll and SuperWoW are loaded.", 1, 0.2, 0.2)
+        DEFAULT_CHAT_FRAME:AddMessage("|cffff2020[TWThreat Fatal Error]|r TWThreat requires ClassicAPI.dll (v1.13.3+) & SuperWoW (v2.2+)! Please ensure both DLLs are loaded.", 1, 0.2, 0.2)
     end
     return
 end
@@ -35,7 +35,7 @@ local RAID_UNITS, PARTY_UNITS = {}, {}
 for i = 1, 40 do RAID_UNITS[i] = "raid" .. i end
 for i = 1, 4 do PARTY_UNITS[i] = "party" .. i end
 
-TWT.addonVer = '1.2.0'
+TWT.addonVer = '1.3.0'
 TWT.addonName = 'TWThreat'
 
 -- Threat Server Protocol Constants
@@ -917,13 +917,7 @@ function TWT.combatEnd()
 
     TWT.releaseThreats()
     TWT.releaseTankModeThreats()
-    if table.wipe then
-        table.wipe(TWT.history)
-    else
-        for k in __pairs(TWT.history) do
-            TWT.history[k] = nil
-        end
-    end
+    table.wipe(TWT.history)
 
     if TWT_CONFIG.hideOOC then
         _G['TWTMain']:Hide()
