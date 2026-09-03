@@ -1271,7 +1271,7 @@ function TWT.updateUI(from)
     end
 end
 
--- Delta-Time Decoupled Bar Smoothing Engine (144Hz+ DXVK Optimized)
+-- Delta-Time Decoupled Bar Smoothing Engine (DXVK Frame Pacing Optimized)
 TWT.barAnimator = CreateFrame('Frame', "TWTBarAnimatorFrame")
 TWT.barAnimator:Hide()
 TWT.barAnimator.frames = {}
