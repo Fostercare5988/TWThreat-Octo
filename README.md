@@ -2,14 +2,14 @@
 
 [![Interface: 1.12.1](https://img.shields.io/badge/Interface-1.12.1%20(5875)-orange.svg)](https://github.com/Fostercare5988/TWThreat)
 [![Version: 1.3.0](https://img.shields.io/badge/Version-1.3.0-blue.svg)](https://github.com/Fostercare5988/TWThreat/releases)
-[![ClassicAPI: v1.13.3+](https://img.shields.io/badge/ClassicAPI-v1.13.3+-green.svg)](https://github.com/brues-code/ClassicAPI)
+[![ClassicAPI: v1.13.4+](https://img.shields.io/badge/ClassicAPI-v1.13.4+-green.svg)](https://github.com/brues-code/ClassicAPI)
 [![SuperWoW: v2.2+](https://img.shields.io/badge/SuperWoW-v2.2+-brightgreen.svg)](https://github.com/balakethelock/SuperWoW)
 [![NamPower: v4.6.3+](https://img.shields.io/badge/NamPower-v4.6.3+-blueviolet.svg)](https://github.com/Emyrk/nampower)
 [![UnitXP: SP3](https://img.shields.io/badge/UnitXP-SP3-teal.svg)](https://codeberg.org/konaka/UnitXP_SP3)
 [![DXVK: Vulkan](https://img.shields.io/badge/DXVK-Vulkan-red.svg)](https://github.com/doitsujin/dxvk)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**TWThreat v1.3.0** is an enterprise-grade, real-time threat metering engine engineered natively for **World of Warcraft 1.12.1 (Build 5875)** running on the **Enhanced Client Extension Stack** (**ClassicAPI v1.13.3+**, **SuperWoW v2.2+**, **NamPower 4.6.3+**, **UnitXP SP3**, and **DXVK**).
+**TWThreat v1.3.0** is an enterprise-grade, real-time threat metering engine engineered natively for **World of Warcraft 1.12.1 (Build 5875)** running on the **Enhanced Client Extension Stack** (**ClassicAPI v1.13.4+**, **SuperWoW v2.2+**, **NamPower 4.6.3+**, **UnitXP SP3**, and **DXVK**).
 
 TWThreat provides instantaneous server-authoritative threat tracking, eliminates combat garbage collection stutter, delivers smooth bar animations, and provides direct SuperWoW GUID targeting.
 
@@ -23,7 +23,7 @@ TWThreat is engineered around strict low-level system integration:
 
 | Engine Component | Minimum Version | Architectural Role & Implementation |
 | :--- | :--- | :--- |
-| **ClassicAPI** | `v1.13.3+` | C++ hardware timers, native `table.wipe` memory recycling, and source-rewritten Lua 5.1 syntax. |
+| **ClassicAPI** | `v1.13.4+` | C++ hardware timers, native `table.wipe` memory recycling, and source-rewritten Lua 5.1 syntax. |
 | **SuperWoW** | `v2.2+` | Direct memory state access, `TargetUnit(guid)` instant mob targeting, and zero-latency threat synchronization. |
 | **NamPower** | `v4.6.3+` | Microsecond-precision combat pipeline and frame-0 event dispatching. |
 | **UnitXP** | `SP3` | High-precision unit inspection and exact threat percentage calculation. |
@@ -74,7 +74,7 @@ Use `/twt` or `/twtshow`:
 
 ### Prerequisites
 1. **World of Warcraft 1.12.1** (Build 5875).
-2. [**ClassicAPI v1.13.3+**](https://github.com/brues-code/ClassicAPI) (`ClassicAPI.dll`).
+2. [**ClassicAPI v1.13.4+**](https://github.com/brues-code/ClassicAPI) (`ClassicAPI.dll`).
 3. [**SuperWoW v2.2+**](https://github.com/balakethelock/SuperWoW) (`SuperWoW.dll`).
 4. [**NamPower v4.6.3+**](https://github.com/Emyrk/nampower) (`nampower.dll`).
 5. [**UnitXP SP3**](https://codeberg.org/konaka/UnitXP_SP3) (`UnitXP_SP3.dll`).
@@ -97,10 +97,10 @@ Use `/twt` or `/twtshow`:
 ## 📜 Changelog
 
 ### v1.3.0
-- **Universal Engine Guard**: Enforced strict dependency check for ClassicAPI v1.13.3+ and SuperWoW v2.2+ at initialization.
+- **Universal Engine Guard**: Enforced strict dependency check for ClassicAPI v1.13.4+ and SuperWoW v2.2+ at initialization.
 - **Unconditional C++ Memory Operations**: Simplified `TWT.combatEnd` to unconditionally invoke native C++ `table.wipe(TWT.history)`.
 - **Single Branch Git Standardization**: Consolidated repository to strictly maintain 1 branch (`main`).
-- **Updated Documentation**: Fully aligned README with Master System Prompt Rule H5 and ClassicAPI v1.13.3+ standards.
+- **Updated Documentation**: Fully aligned README with Master System Prompt Rule H5 and ClassicAPI v1.13.4+ standards.
 
 ### v1.2.0
 - Upgraded startup dependency guard to inspect `CLASSIC_API_VERSION` and `SUPERWOW_VERSION` globals directly.
