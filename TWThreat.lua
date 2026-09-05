@@ -1,7 +1,9 @@
 -- Strict Engine Dependency Guard (Mandatory ClassicAPI v1.13.4+ & SuperWoW v2.2+)
-if not (CLASSIC_API_VERSION and SUPERWOW_VERSION) then
+local MIN_CLASSIC_API = 11304
+if not (CLASSIC_API_VERSION and SUPERWOW_VERSION) or 
+   (type(CLASSIC_API_VERSION) == "number" and CLASSIC_API_VERSION < MIN_CLASSIC_API) then
     if DEFAULT_CHAT_FRAME then
-        DEFAULT_CHAT_FRAME:AddMessage("|cffff2020[TWThreat Fatal Error]|r TWThreat requires ClassicAPI.dll (v1.13.4+) & SuperWoW (v2.2+)! Please ensure both DLLs are loaded.", 1, 0.2, 0.2)
+        DEFAULT_CHAT_FRAME:AddMessage("|cffff2020[TWThreat Fatal Error]|r TWThreat requires ClassicAPI (v1.13.4+) & SuperWoW (v2.2+)! Please ensure both DLLs are loaded.", 1, 0.2, 0.2)
     end
     return
 end
@@ -16,8 +18,7 @@ local __find = string.find
 local __substr = string.sub
 local __parseint = tonumber
 local __parsestring = tostring
-local __getn = table.getn
-local __setn = table.setn
+local table_wipe = table.wipe
 local __tinsert = table.insert
 local __tremove = table.remove
 local __tsort = table.sort
@@ -35,7 +36,7 @@ local RAID_UNITS, PARTY_UNITS = {}, {}
 for i = 1, 40 do RAID_UNITS[i] = "raid" .. i end
 for i = 1, 4 do PARTY_UNITS[i] = "party" .. i end
 
-TWT.addonVer = '1.3.0'
+TWT.addonVer = '1.4.0'
 TWT.addonName = 'TWThreat'
 
 -- Threat Server Protocol Constants
@@ -341,7 +342,7 @@ end
 
 function TWT.queryWho()
     TWT.withAddon = 0
-    TWT.addonStatus = {}
+    table_wipe(TWT.addonStatus)
     local numRaid = GetNumRaidMembers()
     if numRaid > 0 then
         for i = 1, numRaid do
@@ -420,7 +421,7 @@ end)
 function TWT.releaseThreats()
     for name, entry in __pairs(TWT.threats) do
         TWT.threats[name] = nil
-        TWT.threatPool[__getn(TWT.threatPool) + 1] = entry
+        TWT.threatPool[#TWT.threatPool + 1] = entry
     end
 end
 
@@ -439,7 +440,7 @@ end
 function TWT.releaseTankModeThreats()
     for guid, entry in __pairs(TWT.tankModeThreats) do
         TWT.tankModeThreats[guid] = nil
-        TWT.tankModePool[__getn(TWT.tankModePool) + 1] = entry
+        TWT.tankModePool[#TWT.tankModePool + 1] = entry
     end
 end
 
@@ -850,7 +851,7 @@ function TWT.combatStart()
         _G['TWTMain']:Show()
     end
 
-    TWT.spec = {}
+    table_wipe(TWT.spec)
     for t = 1, GetNumTalentTabs() do
         TWT.spec[t] = { talents = 0, texture = '' }
         for i = 1, GetNumTalents(t) do
@@ -945,7 +946,7 @@ function TWT.checkRelay()
     if numRaid == 0 and numParty == 0 then
         return false
     end
-    if __getn(TWT.relayTo) == 0 then
+    if #TWT.relayTo == 0 then
         return false
     end
 
@@ -977,7 +978,7 @@ function TWT.checkRelay()
         end
     end
 
-    return (__getn(TWT.relayTo) > 0)
+    return (#TWT.relayTo > 0)
 end
 
 function TWT.checkTargetFrames()
@@ -1067,8 +1068,10 @@ function TWT.sortThreats()
         item.class = data.class
         item.tank = data.tank
     end
+    for i = count + 1, #TWT.sortList do
+        TWT.sortList[i] = nil
+    end
     TWT.sortCount = count
-    __setn(TWT.sortList, count)
     __tsort(TWT.sortList, threatSortComparator)
     return TWT.sortList, count
 end
@@ -1295,7 +1298,7 @@ function TWT.barAnimator:animateTo(index, perc, instant)
 end
 
 TWT.barAnimator:SetScript("OnShow", function()
-    this.frames = {}
+    table_wipe(this.frames)
 end)
 
 TWT.barAnimator:SetScript("OnUpdate", function()
